@@ -1,4 +1,4 @@
-package br.com.locaweb.locaweb;
+package br.com.locaweb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
