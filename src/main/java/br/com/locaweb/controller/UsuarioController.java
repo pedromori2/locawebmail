@@ -1,8 +1,9 @@
 package br.com.locaweb.controller;
 
 import br.com.locaweb.dto.Usuario;
-import br.com.locaweb.repository.UsuarioRepository;
+import br.com.locaweb.service.UsuarioMediator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,20 +13,23 @@ import java.util.List;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioMediator usuarioMediator;
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @GetMapping
     public List<Usuario> getUsuarios() {
-        return usuarioRepository.findAll();
+        return usuarioMediator.getUsuarios();
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Usuario criarUsuario(@RequestBody Usuario usuario) {
-        return usuarioRepository.save(usuario);
+         return usuarioMediator.save(usuario);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void deletarUsuario(@PathVariable String id) {
-        usuarioRepository.deleteById(id);
+    public void deletarUsuario(@PathVariable Integer id) {
+        usuarioMediator.delete(id);
     }
 }
