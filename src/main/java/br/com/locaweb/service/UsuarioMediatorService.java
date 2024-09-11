@@ -2,14 +2,17 @@ package br.com.locaweb.service;
 
 import br.com.locaweb.dto.Usuario;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+@Service
 @RequiredArgsConstructor
 public class UsuarioMediatorService  implements  UsuarioMediator {
 
     private final UsuarioFindService usuarioFindService;
     private final UsuarioCreateService usuarioCreateService;
     private final UsuarioDeleteService usuarioDeleteService;
+
     @Override
     public List<Usuario> getUsuarios() {
        return usuarioFindService.findAll();

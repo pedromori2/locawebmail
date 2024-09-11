@@ -10,9 +10,9 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UsuarioFindService {
+public class UsuarioFindService  {
 
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Transactional
     public List<Usuario> findAll(){
