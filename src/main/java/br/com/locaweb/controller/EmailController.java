@@ -3,8 +3,10 @@ package br.com.locaweb.controller;
 import br.com.locaweb.entity.Email;
 import br.com.locaweb.service.EmailMediator;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -36,8 +38,22 @@ public class EmailController {
 
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Email getEmailById(@PathVariable String id) {
         return emailMediator.getEmailById(id);
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/user/{userId}")
+    public List<Email> getEmailsByUserId(@PathVariable String userId) {
+        ObjectId objectId;
+        try {
+            objectId = new ObjectId(userId);  // Manually convert String to ObjectId
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid ObjectId format");
+        }
+        // Fetch emails based on the converted ObjectId
+        return emailMediator.getEmailsByUserId(objectId);
+    }
+
 }
