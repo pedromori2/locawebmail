@@ -23,7 +23,7 @@ public class UsuarioController {
 
     private final UsuarioMediator usuarioMediator;
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/all")
     public List<Usuario> getUsuarios() {
         return usuarioMediator.getUsuarios();
@@ -46,5 +46,11 @@ public class UsuarioController {
     @PutMapping("/update/{id}")
     public Usuario update(@RequestBody Usuario usuario, @PathVariable String id) {
         return usuarioMediator.update(usuario, id);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{id}")
+    public Usuario getUsuarioById(@PathVariable String id) {
+        return usuarioMediator.getUsuarioById(id);
     }
 }

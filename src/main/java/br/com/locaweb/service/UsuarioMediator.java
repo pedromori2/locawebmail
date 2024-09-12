@@ -14,5 +14,7 @@ public interface UsuarioMediator {
 
     Usuario update(Usuario usuario, String id);
 
+    Usuario getUsuarioById(String id);
+
 
 }

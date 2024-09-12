@@ -33,4 +33,9 @@ public class UsuarioMediatorService  implements  UsuarioMediator {
     public Usuario update(Usuario usuario, String id) {
         return usuarioUpdateService.update(usuario, id);
     }
+
+    @Override
+    public Usuario getUsuarioById(String id) {
+        return usuarioFindService.getUsuarioById(id);
+    }
 }
