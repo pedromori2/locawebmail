@@ -1,6 +1,6 @@
 package br.com.locaweb.service;
 
-import br.com.locaweb.dto.Usuario;
+import br.com.locaweb.entity.Usuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,19 +12,25 @@ public class UsuarioMediatorService  implements  UsuarioMediator {
     private final UsuarioFindService usuarioFindService;
     private final UsuarioCreateService usuarioCreateService;
     private final UsuarioDeleteService usuarioDeleteService;
+    private final UsuarioUpdateService usuarioUpdateService;
 
     @Override
     public List<Usuario> getUsuarios() {
-       return usuarioFindService.findAll();
+        return usuarioFindService.getUsuarios();
     }
 
     @Override
-    public Usuario save(Usuario usuario) {
-        return usuarioCreateService.save(usuario);
+    public Usuario create(Usuario usuario) {
+        return usuarioCreateService.create(usuario);
     }
 
     @Override
-    public void delete(Integer id) {
-        usuarioDeleteService.delete(id);
+    public Usuario delete(String id) {
+        return usuarioDeleteService.delete(id);
+    }
+
+    @Override
+    public Usuario update(Usuario usuario, String id) {
+        return usuarioUpdateService.update(usuario, id);
     }
 }

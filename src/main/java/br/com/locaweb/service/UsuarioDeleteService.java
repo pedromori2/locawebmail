@@ -1,5 +1,6 @@
 package br.com.locaweb.service;
 
+import br.com.locaweb.entity.Usuario;
 import br.com.locaweb.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,10 @@ public class UsuarioDeleteService {
     private final UsuarioRepository usuarioRepository;
 
     @Transactional
-    public void delete(Integer id){
-        usuarioRepository.deleteById(String.valueOf(id));
+    public Usuario delete(String id) {
+        Usuario usuario = usuarioRepository.findById(id).get();
+        usuarioRepository.delete(usuario);
+
+        return usuario;
     }
 }

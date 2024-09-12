@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://pedromori:China123@cluster0.geeg2fr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      database: locaweb

@@ -1,18 +1,23 @@
-package br.com.locaweb.dto;
+package br.com.locaweb.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document(collection = "users")
+@AllArgsConstructor
+@NoArgsConstructor
+@Document(collection = "user")
 public class Usuario {
+
         @Id
         private String id;
-        private String nome;
-        private String ultimoNome;
+        private String name;
+        private String lastName;
         private String email;
-        private String senha;
+        private String password;
         private boolean tema_escuro;
 
 }

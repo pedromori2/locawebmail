@@ -1,6 +1,6 @@
 package br.com.locaweb.service;
 
-import br.com.locaweb.dto.Usuario;
+import br.com.locaweb.entity.Usuario;
 import br.com.locaweb.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ public class UsuarioFindService  {
     private final UsuarioRepository usuarioRepository;
 
     @Transactional
-    public List<Usuario> findAll(){
+    public List<Usuario> getUsuarios() {
         return usuarioRepository.findAll();
     }
 
