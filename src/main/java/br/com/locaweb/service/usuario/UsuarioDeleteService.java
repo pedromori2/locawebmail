@@ -1,4 +1,4 @@
-package br.com.locaweb.service;
+package br.com.locaweb.service.usuario;
 
 import br.com.locaweb.entity.Usuario;
 import br.com.locaweb.repository.UsuarioRepository;
@@ -8,14 +8,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class UsuarioCreateService {
-
+public class UsuarioDeleteService {
     private final UsuarioRepository usuarioRepository;
 
     @Transactional
-    public Usuario create(Usuario usuario) {
-        return usuarioRepository.save(usuario);
+    public Usuario delete(String id) {
+        Usuario usuario = usuarioRepository.findById(id).get();
+        usuarioRepository.delete(usuario);
+
+        return usuario;
     }
-
 }
-

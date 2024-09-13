@@ -1,4 +1,4 @@
-package br.com.locaweb.service;
+package br.com.locaweb.service.usuario;
 
 import br.com.locaweb.entity.Usuario;
 import br.com.locaweb.repository.UsuarioRepository;
@@ -6,16 +6,22 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
-public class UsuarioDeleteService {
+public class UsuarioFindService {
+
     private final UsuarioRepository usuarioRepository;
 
     @Transactional
-    public Usuario delete(String id) {
-        Usuario usuario = usuarioRepository.findById(id).get();
-        usuarioRepository.delete(usuario);
-
-        return usuario;
+    public List<Usuario> getUsuarios() {
+        return usuarioRepository.findAll();
     }
+
+    @Transactional
+    Usuario getUsuarioById(String id) {
+        return usuarioRepository.findById(id).get();
+    }
+
 }

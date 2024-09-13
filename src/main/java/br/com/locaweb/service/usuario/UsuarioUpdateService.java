@@ -1,4 +1,4 @@
-package br.com.locaweb.service;
+package br.com.locaweb.service.usuario;
 
 import br.com.locaweb.entity.Usuario;
 import br.com.locaweb.repository.UsuarioRepository;
