@@ -1,4 +1,4 @@
-package br.com.locaweb.service;
+package br.com.locaweb.service.email;
 
 import br.com.locaweb.entity.Email;
 import org.bson.types.ObjectId;
