@@ -1,6 +1,8 @@
 package br.com.locaweb.controller;
 
 import br.com.locaweb.entity.Usuario;
+import br.com.locaweb.entity.UsuarioDTO;
+import br.com.locaweb.mapper.UsuarioMapper;
 import br.com.locaweb.repository.UsuarioRepository;
 import br.com.locaweb.service.usuario.UsuarioMediator;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +30,10 @@ public class UsuarioController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/all")
-    public List<Usuario> getUsuarios() {
-        return usuarioMediator.getUsuarios();
+    public List<UsuarioDTO> getUsuarios() {
+        List<Usuario> usuarios = usuarioMediator.getUsuarios();
+        List<UsuarioDTO> usuarioDTOS = UsuarioMapper.toDTOList(usuarios);
+        return usuarioDTOS;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
