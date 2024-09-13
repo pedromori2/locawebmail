@@ -34,7 +34,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/teste")
-    public String teste() {
-        return "Salve";
+    public ResponseEntity teste() {
+        return ResponseEntity.ok("Salve");
     }
 }
