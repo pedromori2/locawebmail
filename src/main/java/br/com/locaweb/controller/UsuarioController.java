@@ -4,6 +4,7 @@ import br.com.locaweb.entity.Usuario;
 import br.com.locaweb.entity.UsuarioDTO;
 import br.com.locaweb.mapper.UsuarioMapper;
 import br.com.locaweb.repository.UsuarioRepository;
+import br.com.locaweb.request.UsuarioRequest;
 import br.com.locaweb.service.usuario.UsuarioMediator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -38,7 +39,7 @@ public class UsuarioController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/insert")
-    public Usuario criarUsuario(@RequestBody Usuario usuario) {
+    public Usuario criarUsuario(@RequestBody UsuarioRequest usuario) {
         if (this.usuarioRepository.findByEmail(usuario.getEmail()) != null) {
             throw new RuntimeException("Usuário já cadastrado.");
         }
