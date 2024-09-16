@@ -1,6 +1,10 @@
 package br.com.locaweb.entity;
 
 import br.com.locaweb.enums.CaixaEmailEnum;
+import br.com.locaweb.util.conversion.ObjectIdDeserializer;
+import br.com.locaweb.util.conversion.ObjectIdSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +24,9 @@ public class Email {
         @Id
         private String id;
         private CaixaEmailEnum caixaEmail_id;
+
+        @JsonSerialize(using = ObjectIdSerializer.class)
+        @JsonDeserialize(using = ObjectIdDeserializer.class)
         private ObjectId user_id;
         private String email_de;
         private List<String> email_para;
