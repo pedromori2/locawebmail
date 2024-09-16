@@ -15,7 +15,7 @@ public class UsuarioUpdateService {
         Usuario user = usuarioRepository.findById(id).get();
         user.setName(usuario.getName());
         user.setPassword(usuario.getPassword());
-        user.setEmail(usuario.getEmail());
+        user.setUserName(usuario.getUsername());
         user.setTema_escuro(usuario.isTema_escuro());
         user.setLastName(usuario.getLastName());
 
