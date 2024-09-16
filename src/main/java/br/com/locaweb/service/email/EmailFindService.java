@@ -41,8 +41,8 @@ public class EmailFindService {
     public List<EmailDTO> searchEmails(String search) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String emailLogado = auth.getName();
-        Usuario user = (Usuario) usuarioRepository.findByEmail(emailLogado);
+        String userName = auth.getName();
+        Usuario user = (Usuario) usuarioRepository.findByUserName(userName);
 
         String userId = user.getId();
 

@@ -3,6 +3,8 @@ package br.com.locaweb.controller;
 import br.com.locaweb.entity.Email;
 import br.com.locaweb.entity.EmailDTO;
 import br.com.locaweb.entity.Usuario;
+import br.com.locaweb.repository.UsuarioRepository;
+import br.com.locaweb.request.EmailRequest;
 import br.com.locaweb.service.email.EmailMediator;
 import br.com.locaweb.util.RateLimiter;
 import lombok.RequiredArgsConstructor;
@@ -10,16 +12,18 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -30,6 +34,7 @@ import java.util.List;
 public class EmailController {
 
     private final EmailMediator emailMediator;
+    private final UsuarioRepository usuarioRepository;
 
     @Autowired
     private RateLimiter rateLimiter;
@@ -44,21 +49,27 @@ public class EmailController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/insert")
-    public Email criarEmail(@RequestBody Email email) {
+    public Email criarEmail(@RequestBody EmailRequest emailRequest) {
 
-        int totalDestinatarios = (email.getEmail_para() != null ? email.getEmail_para().size() : 0)
-                + (email.getEmail_cc() != null ? email.getEmail_cc().size() : 0)
-                + (email.getEmail_cco() != null ? email.getEmail_cco().size() : 0);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
+        Usuario user = (Usuario) usuarioRepository.findByUserName(userName);
+        ObjectId objectId = new ObjectId(user.getId());
+        emailRequest.setUserId(objectId);
+
+        int totalDestinatarios = (emailRequest.getEmailPara() != null ? emailRequest.getEmailPara().size() : 0)
+                + (emailRequest.getEmailCc() != null ? emailRequest.getEmailCc().size() : 0)
+                + (emailRequest.getEmailCco() != null ? emailRequest.getEmailCco().size() : 0);
 
         if (totalDestinatarios > MAX_DESTINATARIOS) {
             throw new IllegalArgumentException("AntiSpam Policy: Too Many Recipients. The total number of recipients cannot exceed " + MAX_DESTINATARIOS);
         }
 
-        if (!rateLimiter.canSendEmail(email.getUserId())) {
+        if (!rateLimiter.canSendEmail(emailRequest.getUserId())) {
             throw new IllegalStateException("AntiSpam Policy: You cannot send more than 2 emails per second. Please wait and try again.");
         }
 
-        return emailMediator.create(email);
+        return emailMediator.create(emailRequest);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
