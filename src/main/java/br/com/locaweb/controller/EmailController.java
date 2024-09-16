@@ -1,20 +1,14 @@
 package br.com.locaweb.controller;
 
 import br.com.locaweb.entity.Email;
-import br.com.locaweb.response.EmailResponse;
-import br.com.locaweb.search.EmailSearch;
 import br.com.locaweb.service.email.EmailMediator;
 import br.com.locaweb.util.RateLimiter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -76,11 +70,11 @@ public class EmailController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/user/{userId}")
-    public Page<EmailResponse> getEmailsByUserId(@PathVariable("id") final String userId,
-                                                 @PageableDefault(sort = "horario", direction = Sort.Direction.DESC) Pageable pageable,
-                                                 @ModelAttribute EmailSearch search) {
+    public Page<Email> getEmailsByUserId(@PathVariable("user_id") final String userId,
+                                         @PathVariable final Integer page,
+                                         @PathVariable final Integer size) {
 
-        return emailMediator.getEmailsByUserId(userId, pageable, search);
+        return emailMediator.getEmailsByUserId(userId, page, size);
     }
 
 }

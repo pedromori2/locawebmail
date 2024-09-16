@@ -16,19 +16,19 @@ import java.util.List;
 @Document(collection = "email")
 public class Email {
 
-        @Id
-        private String id;
-        private CaixaEmailEnum caixaEmail_id;
+    @Id
+    private String id;
+    private CaixaEmailEnum caixaEmail_id;
     private String user_id;
     private String email_de;
-        private List<String> email_para;
-        private List<String> email_cc;
-        private List<String> email_cco;
-        private Date horario;
-        private String titulo;
-        private String conteudo;
-        private String foto;
-        private List<String> anexo;
+    private List<String> email_para;
+    private List<String> email_cc;
+    private List<String> email_cco;
+    private Date horario;
+    private String titulo;
+    private String conteudo;
+    private String foto;
+    private List<String> anexo;
 
 }
 
