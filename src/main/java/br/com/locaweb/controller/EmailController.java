@@ -1,20 +1,24 @@
 package br.com.locaweb.controller;
 
 import br.com.locaweb.entity.Email;
+import br.com.locaweb.entity.EmailDTO;
 import br.com.locaweb.service.email.EmailMediator;
 import br.com.locaweb.util.RateLimiter;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -48,7 +52,7 @@ public class EmailController {
             throw new IllegalArgumentException("AntiSpam Policy: Too Many Recipients. The total number of recipients cannot exceed " + MAX_DESTINATARIOS);
         }
 
-        if (!rateLimiter.canSendEmail(email.getUser_id())) {
+        if (!rateLimiter.canSendEmail(email.getUserId())) {
             throw new IllegalStateException("AntiSpam Policy: You cannot send more than 2 emails per second. Please wait and try again.");
         }
 
@@ -70,11 +74,24 @@ public class EmailController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/user/{userId}")
-    public Page<Email> getEmailsByUserId(@PathVariable("user_id") final String userId,
-                                         @PathVariable final Integer page,
-                                         @PathVariable final Integer size) {
+    public List<Email> getEmailsByUserId(@PathVariable String userId) {
+        ObjectId objectId;
+        try {
+            objectId = new ObjectId(userId);  // Manually convert String to ObjectId
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid ObjectId format");
+        }
+        // Fetch emails based on the converted ObjectId
+        return emailMediator.getEmailsByUserId(objectId);
+    }
 
-        return emailMediator.getEmailsByUserId(userId, page, size);
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/search")
+    public ResponseEntity<List<EmailDTO>> searchEmails(
+            @RequestParam(value = "search") String search) {
+
+        List<EmailDTO> result = emailMediator.searchEmails(search);
+        return ResponseEntity.ok(result);
     }
 
 }

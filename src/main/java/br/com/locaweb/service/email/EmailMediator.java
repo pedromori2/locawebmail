@@ -1,7 +1,8 @@
 package br.com.locaweb.service.email;
 
 import br.com.locaweb.entity.Email;
-import org.springframework.data.domain.Page;
+import br.com.locaweb.entity.EmailDTO;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -9,13 +10,15 @@ public interface EmailMediator {
 
     List<Email> getEmails();
 
-    Page<Email> getEmailsByUserId(String userId, Integer page, Integer size);
+    List<Email> getEmailsByUserId(ObjectId user_id);
 
     Email create(Email email);
 
     Email delete(String id);
 
     Email getEmailById(String id);
+
+    List<EmailDTO> searchEmails(String search);
 
 
 }

@@ -1,8 +1,9 @@
 package br.com.locaweb.service.email;
 
 import br.com.locaweb.entity.Email;
+import br.com.locaweb.entity.EmailDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,7 +37,12 @@ public class EmailMediatorService implements  EmailMediator {
     }
 
     @Override
-    public Page<Email> getEmailsByUserId(String userId, Integer page, Integer size) {
-        return emailFindService.findEmailsByUserId(userId, page, size);
+    public List<EmailDTO> searchEmails(String search) {
+        return emailFindService.searchEmails(search);
+    }
+
+    @Override
+    public List<Email> getEmailsByUserId(ObjectId user_id) {
+        return emailFindService.getEmailsByUserId(user_id);
     }
 }
