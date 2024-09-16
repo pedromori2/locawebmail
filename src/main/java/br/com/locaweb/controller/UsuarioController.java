@@ -40,11 +40,11 @@ public class UsuarioController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/insert")
     public Usuario criarUsuario(@RequestBody UsuarioRequest usuario) {
-        if (this.usuarioRepository.findByEmail(usuario.getEmail()) != null) {
+        if (this.usuarioRepository.findByUserName(usuario.getUserName()) != null) {
             throw new RuntimeException("Usuário já cadastrado.");
         }
         String encryptedPassword = new BCryptPasswordEncoder().encode(usuario.getPassword());
-        Usuario newUser = new Usuario(usuario.getName(), usuario.getLastName(), usuario.getEmail(), encryptedPassword);
+        Usuario newUser = new Usuario(usuario.getName(), usuario.getLastName(), usuario.getUserName(), encryptedPassword);
 
         return usuarioMediator.create(newUser);
     }

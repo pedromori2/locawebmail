@@ -11,6 +11,6 @@ public class UsuarioDTO {
     private String id;
     private String name;
     private String lastName;
-    private String email;
+    private String userName;
     private boolean tema_escuro;
 }

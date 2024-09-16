@@ -13,7 +13,7 @@ public class UsuarioMapper {
                 usuario.getId(),
                 usuario.getName(),
                 usuario.getLastName(),
-                usuario.getEmail(),
+                usuario.getUsername(),
                 usuario.isTema_escuro()
         );
     }
