@@ -4,7 +4,6 @@ import br.com.locaweb.enums.CaixaEmailEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,8 +19,8 @@ public class Email {
         @Id
         private String id;
         private CaixaEmailEnum caixaEmail_id;
-        private ObjectId user_id;
-        private String email_de;
+    private String user_id;
+    private String email_de;
         private List<String> email_para;
         private List<String> email_cc;
         private List<String> email_cco;

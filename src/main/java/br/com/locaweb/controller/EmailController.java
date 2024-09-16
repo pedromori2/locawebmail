@@ -1,21 +1,26 @@
 package br.com.locaweb.controller;
 
 import br.com.locaweb.entity.Email;
+import br.com.locaweb.response.EmailResponse;
+import br.com.locaweb.search.EmailSearch;
 import br.com.locaweb.service.email.EmailMediator;
 import br.com.locaweb.util.RateLimiter;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -71,15 +76,11 @@ public class EmailController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/user/{userId}")
-    public List<Email> getEmailsByUserId(@PathVariable String userId) {
-        ObjectId objectId;
-        try {
-            objectId = new ObjectId(userId);  // Manually convert String to ObjectId
-        } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid ObjectId format");
-        }
-        // Fetch emails based on the converted ObjectId
-        return emailMediator.getEmailsByUserId(objectId);
+    public Page<EmailResponse> getEmailsByUserId(@PathVariable("id") final String userId,
+                                                 @PageableDefault(sort = "horario", direction = Sort.Direction.DESC) Pageable pageable,
+                                                 @ModelAttribute EmailSearch search) {
+
+        return emailMediator.getEmailsByUserId(userId, pageable, search);
     }
 
 }
