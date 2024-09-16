@@ -15,6 +15,7 @@ public class EmailMediatorService implements  EmailMediator {
     private final EmailFindService emailFindService;
     private final EmailCreateService emailCreateService;
     private final EmailDeleteService emailDeleteService;
+    private final EmailUpdateService emailUpdateService;
 
     @Override
     public List<Email> getEmails() {
@@ -29,6 +30,11 @@ public class EmailMediatorService implements  EmailMediator {
     @Override
     public Email delete(String id) {
         return emailDeleteService.delete(id);
+    }
+
+    @Override
+    public Email update(Email email, String id) {
+        return emailUpdateService.update(email, id);
     }
 
     @Override

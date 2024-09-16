@@ -2,6 +2,7 @@ package br.com.locaweb.controller;
 
 import br.com.locaweb.entity.Email;
 import br.com.locaweb.entity.EmailDTO;
+import br.com.locaweb.entity.Usuario;
 import br.com.locaweb.service.email.EmailMediator;
 import br.com.locaweb.util.RateLimiter;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -65,6 +67,11 @@ public class EmailController {
         return emailMediator.delete(id);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/update/{id}")
+    public Email update(@RequestBody Email email, @PathVariable String id) {
+        return emailMediator.update(email, id);
+    }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/id/{id}")

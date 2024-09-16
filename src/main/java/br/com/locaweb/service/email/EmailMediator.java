@@ -16,6 +16,8 @@ public interface EmailMediator {
 
     Email delete(String id);
 
+    Email update(Email email, String id);
+
     Email getEmailById(String id);
 
     List<EmailDTO> searchEmails(String search);

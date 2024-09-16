@@ -10,10 +10,9 @@ public class UsuarioRequest {
 
     private String name;
     private String lastName;
-    @Email
     @NotNull
     @NotBlank
-    private String email;
+    private String userName;
     private String password;
 
 }

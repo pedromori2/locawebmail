@@ -26,15 +26,15 @@ public class Usuario implements UserDetails {
         private String name;
         private String lastName;
         @Indexed(unique = true)
-        private String email;
+        private String userName;
         private String password;
         private boolean tema_escuro;
 
 
-        public Usuario(String name, String lastName, String email, String password) {
+        public Usuario(String name, String lastName, String userName, String password) {
                 this.name = name;
                 this.lastName = lastName;
-                this.email = email;
+                this.userName = userName;
                 this.password = password;
         }
 
@@ -46,7 +46,7 @@ public class Usuario implements UserDetails {
 
         @Override
         public String getUsername() {
-                return email;
+                return userName;
         }
 
         @Override

@@ -3,7 +3,10 @@ package br.com.locaweb.enums;
 public enum CaixaEmailEnum {
 
     entrada("entrada"),
-    saida("saida");
+    saida("saida"),
+    lixeira("lixeira"),
+    arquivo("arquivo"),
+    importante("importante");
 
     private String descricao;
 
