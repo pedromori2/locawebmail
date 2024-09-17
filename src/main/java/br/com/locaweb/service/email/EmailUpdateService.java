@@ -14,7 +14,7 @@ public class EmailUpdateService {
     public Email update(Email email, String id) {
         Email emailUpdate = emailRepository.findById(id).get();
         emailUpdate.setCaixaEmail_id(email.getCaixaEmail_id());
-        emailUpdate.setUserId(email.getUserId());
+        emailUpdate.setUser_id(email.getUser_id());
         emailUpdate.setEmail_de(email.getEmail_de());
         emailUpdate.setEmail_para(email.getEmail_para());
         emailUpdate.setEmail_cc(email.getEmail_cc());

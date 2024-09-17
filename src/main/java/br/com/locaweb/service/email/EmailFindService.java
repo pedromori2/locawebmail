@@ -67,7 +67,7 @@ public class EmailFindService {
     }
 
     private EmailDTO convertToDTO(Email email) {
-        return new EmailDTO(email.getId(), email.getTitulo(), email.getConteudo(), email.getUserId());
+        return new EmailDTO(email.getId(), email.getTitulo(), email.getConteudo(), email.getUser_id());
     }
 
 }

@@ -55,17 +55,17 @@ public class EmailController {
         String userName = auth.getName();
         Usuario user = (Usuario) usuarioRepository.findByUserName(userName);
         ObjectId objectId = new ObjectId(user.getId());
-        emailRequest.setUserId(objectId);
+        emailRequest.setUser_id(objectId);
 
-        int totalDestinatarios = (emailRequest.getEmailPara() != null ? emailRequest.getEmailPara().size() : 0)
-                + (emailRequest.getEmailCc() != null ? emailRequest.getEmailCc().size() : 0)
-                + (emailRequest.getEmailCco() != null ? emailRequest.getEmailCco().size() : 0);
+        int totalDestinatarios = (emailRequest.getEmail_para() != null ? emailRequest.getEmail_para().size() : 0)
+                + (emailRequest.getEmail_cc() != null ? emailRequest.getEmail_cc().size() : 0)
+                + (emailRequest.getEmail_cco() != null ? emailRequest.getEmail_cco().size() : 0);
 
         if (totalDestinatarios > MAX_DESTINATARIOS) {
             throw new IllegalArgumentException("AntiSpam Policy: Too Many Recipients. The total number of recipients cannot exceed " + MAX_DESTINATARIOS);
         }
 
-        if (!rateLimiter.canSendEmail(emailRequest.getUserId())) {
+        if (!rateLimiter.canSendEmail(emailRequest.getUser_id())) {
             throw new IllegalStateException("AntiSpam Policy: You cannot send more than 2 emails per second. Please wait and try again.");
         }
 
