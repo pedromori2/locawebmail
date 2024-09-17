@@ -24,6 +24,7 @@ public class EmailRequest {
     private ObjectId userId;
 
     @NotBlank
+    @Email
     @Field(name = "email_de")
     private String emailDe;
 
