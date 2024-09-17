@@ -28,7 +28,7 @@ public class Email {
         @Field(name = "user_id")
         @JsonSerialize(using = ObjectIdSerializer.class)
         @JsonDeserialize(using = ObjectIdDeserializer.class)
-        private ObjectId user_id;
+        private ObjectId userId;
         private String email_de;
         private List<String> email_para;
         private List<String> email_cc;
