@@ -16,32 +16,26 @@ import java.util.List;
 public class EmailRequest {
 
     @NotBlank
-    @Field(name = "caixaEmail_id")
-    private CaixaEmailEnum caixaEmailId;
+    private CaixaEmailEnum caixaEmail_id;
 
     @NotNull
-    @Field(name = "user_id")
-    private ObjectId userId;
+    private ObjectId user_id;
 
     @NotBlank
     @Email
-    @Field(name = "email_de")
-    private String emailDe;
+    private String email_de;
 
     @NotEmpty
     @Email
-    @Field(name = "email_para")
-    private List<String> emailPara;
+    private List<String> email_para;
 
     @NotEmpty
     @Email
-    @Field(name = "email_cc")
-    private List<String> emailCc;
+    private List<String> email_cc;
 
     @Email
     @NotEmpty
-    @Field(name = "email_cco")
-    private List<String> emailCco;
+    private List<String> email_cco;
 
     @NotNull(message = "'horario' must be a date and is required")
     private Date horario;
