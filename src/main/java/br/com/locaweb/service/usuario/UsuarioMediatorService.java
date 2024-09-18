@@ -1,6 +1,7 @@
 package br.com.locaweb.service.usuario;
 
 import br.com.locaweb.entity.Usuario;
+import br.com.locaweb.request.UsuarioRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class UsuarioMediatorService  implements  UsuarioMediator {
     }
 
     @Override
-    public Usuario update(Usuario usuario, String id) {
+    public Usuario update(UsuarioRequest usuario, String id) {
         return usuarioUpdateService.update(usuario, id);
     }
 

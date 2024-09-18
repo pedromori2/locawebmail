@@ -13,5 +13,6 @@ public class UsuarioRequest {
     @NotBlank
     private String userName;
     private String password;
+    private boolean tema_escuro;
 
 }

@@ -1,6 +1,7 @@
 package br.com.locaweb.service.usuario;
 
 import br.com.locaweb.entity.Usuario;
+import br.com.locaweb.request.UsuarioRequest;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface UsuarioMediator {
 
     Usuario delete(String id);
 
-    Usuario update(Usuario usuario, String id);
+    Usuario update(UsuarioRequest usuario, String id);
 
     Usuario getUsuarioById(String id);
 
