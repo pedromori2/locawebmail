@@ -2,6 +2,7 @@ package br.com.locaweb.service.usuario;
 
 import br.com.locaweb.entity.Usuario;
 import br.com.locaweb.request.UsuarioRequest;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -17,5 +18,6 @@ public interface UsuarioMediator {
 
     Usuario getUsuarioById(String id);
 
+    UserDetails getUsuarioByUserName(String userName);
 
 }

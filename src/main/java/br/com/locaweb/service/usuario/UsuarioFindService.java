@@ -3,6 +3,7 @@ package br.com.locaweb.service.usuario;
 import br.com.locaweb.entity.Usuario;
 import br.com.locaweb.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,11 @@ public class UsuarioFindService {
     @Transactional
     Usuario getUsuarioById(String id) {
         return usuarioRepository.findById(id).get();
+    }
+
+    @Transactional
+    UserDetails getUsuarioByUserName(String userName) {
+        return usuarioRepository.findByUserName(userName);
     }
 
 }
