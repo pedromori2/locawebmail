@@ -3,6 +3,8 @@ package br.com.locaweb.request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 public class UsuarioRequest {
@@ -13,6 +15,8 @@ public class UsuarioRequest {
     @NotBlank
     private String userName;
     private String password;
-    private boolean tema_escuro;
+    @Setter
+    @Getter
+    private Boolean tema_escuro;
 
 }

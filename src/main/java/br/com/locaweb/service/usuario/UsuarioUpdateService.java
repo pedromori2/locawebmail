@@ -19,7 +19,7 @@ public class UsuarioUpdateService {
         user.setName(usuario.getName());
         user.setPassword(encryptedPassword);
         user.setUserName(usuario.getUserName());
-        user.setTema_escuro(usuario.isTema_escuro());
+        user.setTema_escuro(usuario.getTema_escuro());
         user.setLastName(usuario.getLastName());
 
         usuarioRepository.save(user);
