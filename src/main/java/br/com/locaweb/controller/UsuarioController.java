@@ -81,7 +81,7 @@ public class UsuarioController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PutMapping("/update-tema/{userName}")
+    @PutMapping("/update-tema/{id}")
     public Usuario updateTema(@RequestBody UsuarioDTO usuario, @PathVariable String id) {
         return usuarioMediator.updateTema(usuario, id);
     }
