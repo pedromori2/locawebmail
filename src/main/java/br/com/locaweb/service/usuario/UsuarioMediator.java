@@ -23,4 +23,6 @@ public interface UsuarioMediator {
 
     UsuarioDTO getTemaUsuario(String userName);
 
+    Usuario updateTema(UsuarioDTO usuario, String id);
+
 }

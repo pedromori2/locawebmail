@@ -1,6 +1,8 @@
 package br.com.locaweb.service.usuario;
 
 import br.com.locaweb.entity.Usuario;
+import br.com.locaweb.entity.UsuarioDTO;
+import br.com.locaweb.mapper.UsuarioMapper;
 import br.com.locaweb.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,6 +30,13 @@ public class UsuarioFindService {
     @Transactional
     UserDetails getUsuarioByUserName(String userName) {
         return usuarioRepository.findByUserName(userName);
+    }
+
+    @Transactional
+    public UsuarioDTO getTema(String userName) {
+        Usuario user = (Usuario) usuarioRepository.findByUserName(userName);
+        UsuarioDTO userDTO = UsuarioMapper.toDTO(user);
+        return userDTO;
     }
 
 }

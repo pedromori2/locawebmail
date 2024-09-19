@@ -79,4 +79,10 @@ public class UsuarioController {
     public UsuarioDTO getTemaUsuario(@PathVariable String userName) {
         return usuarioMediator.getTemaUsuario(userName);
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/update-tema/{userName}")
+    public Usuario updateTema(@RequestBody UsuarioDTO usuario, @PathVariable String id) {
+        return usuarioMediator.updateTema(usuario, id);
+    }
 }

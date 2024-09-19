@@ -49,6 +49,11 @@ public class UsuarioMediatorService  implements  UsuarioMediator {
 
     @Override
     public UsuarioDTO getTemaUsuario(String userName) {
-        return usuarioUpdateService.updateTema(userName);
+        return usuarioFindService.getTema(userName);
+    }
+
+    @Override
+    public Usuario updateTema(UsuarioDTO usuario, String id) {
+        return usuarioUpdateService.updateTema(usuario, id);
     }
 }
