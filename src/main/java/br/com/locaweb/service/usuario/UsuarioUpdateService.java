@@ -39,8 +39,6 @@ public class UsuarioUpdateService {
     public Usuario updateTema(UsuarioDTO usuario, String id) {
         Usuario user = usuarioRepository.findById(id).get();
 
-        user.setId(usuario.getId());
-        user.setName(usuario.getName());
         user.setLastName(usuario.getLastName());
         user.setUserName(usuario.getUserName());
         user.setTema_escuro(usuario.isTema_escuro());
