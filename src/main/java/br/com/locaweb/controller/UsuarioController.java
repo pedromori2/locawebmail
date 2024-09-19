@@ -8,9 +8,16 @@ import br.com.locaweb.request.UsuarioRequest;
 import br.com.locaweb.service.usuario.UsuarioMediator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -49,35 +56,9 @@ public class UsuarioController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PatchMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public Usuario update(@RequestBody UsuarioRequest usuarioRequest, @PathVariable String id) {
-        Usuario existingUsuario = usuarioMediator.getUsuarioById(id);
-
-        if (usuarioRequest.getName() != null) {
-            existingUsuario.setName(usuarioRequest.getName());
-        }
-        if (usuarioRequest.getLastName() != null) {
-            existingUsuario.setLastName(usuarioRequest.getLastName());
-        }
-        if (usuarioRequest.getUserName() != null) {
-            existingUsuario.setUserName(usuarioRequest.getUserName());
-        }
-        if (usuarioRequest.getPassword() != null) {
-            existingUsuario.setPassword(usuarioRequest.getPassword());
-        }
-        if (usuarioRequest.getTema_escuro() != null) {
-            existingUsuario.setTema_escuro(usuarioRequest.getTema_escuro());
-        }
-
-        UsuarioRequest updatedRequest = new UsuarioRequest();
-        updatedRequest.setName(existingUsuario.getName());
-        updatedRequest.setLastName(existingUsuario.getLastName());
-        updatedRequest.setUserName(existingUsuario.getUsername());
-        updatedRequest.setPassword(existingUsuario.getPassword());
-        updatedRequest.setTema_escuro(existingUsuario.isTema_escuro());
-
-        return usuarioMediator.update(updatedRequest, id);
-
+        return usuarioMediator.update(usuarioRequest, id);
     }
 
 

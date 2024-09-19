@@ -12,12 +12,18 @@ import org.springframework.stereotype.Service;
 public class UsuarioUpdateService {
 
     private final UsuarioRepository usuarioRepository;
+    private final BCryptPasswordEncoder encoder;
 
     public Usuario update(UsuarioRequest usuario, String id) {
-        String encryptedPassword = new BCryptPasswordEncoder().encode(usuario.getPassword());
         Usuario user = usuarioRepository.findById(id).get();
+        boolean senhaCorreta = encoder.matches(usuario.getPassword(), user.getPassword());
+
+        if (!senhaCorreta) {
+            String encryptedPassword = encoder.encode(usuario.getPassword());
+            user.setPassword(encryptedPassword);
+        }
+
         user.setName(usuario.getName());
-        user.setPassword(encryptedPassword);
         user.setUserName(usuario.getUserName());
         user.setTema_escuro(usuario.getTema_escuro());
         user.setLastName(usuario.getLastName());
