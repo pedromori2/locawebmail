@@ -8,5 +8,6 @@ import lombok.Data;
 public class UsuarioDTO {
     private String name;
     private String lastName;
+    private String userName;
     private boolean tema_escuro;
 }

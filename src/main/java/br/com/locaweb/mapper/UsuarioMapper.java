@@ -12,6 +12,7 @@ public class UsuarioMapper {
         return new UsuarioDTO(
                 usuario.getName(),
                 usuario.getLastName(),
+                usuario.getUsername(),
                 usuario.isTema_escuro()
         );
     }

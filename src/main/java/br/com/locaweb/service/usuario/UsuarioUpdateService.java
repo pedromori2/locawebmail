@@ -41,6 +41,7 @@ public class UsuarioUpdateService {
 
         user.setName(usuario.getName());
         user.setLastName(usuario.getLastName());
+        user.setUserName(usuario.getUserName());
         user.setTema_escuro(usuario.isTema_escuro());
 
         usuarioRepository.save(user);
