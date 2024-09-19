@@ -73,4 +73,10 @@ public class UsuarioController {
     public Usuario getUsuarioByUserName(@PathVariable String userName) {
         return (Usuario) usuarioMediator.getUsuarioByUserName(userName);
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/update-tema/{userName}")
+    public UsuarioDTO getTemaUsuario(@PathVariable String userName) {
+        return usuarioMediator.getTemaUsuario(userName);
+    }
 }

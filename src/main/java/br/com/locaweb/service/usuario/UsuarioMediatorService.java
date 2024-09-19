@@ -1,6 +1,7 @@
 package br.com.locaweb.service.usuario;
 
 import br.com.locaweb.entity.Usuario;
+import br.com.locaweb.entity.UsuarioDTO;
 import br.com.locaweb.request.UsuarioRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -44,5 +45,10 @@ public class UsuarioMediatorService  implements  UsuarioMediator {
     @Override
     public UserDetails getUsuarioByUserName(String userName) {
         return (Usuario) usuarioFindService.getUsuarioByUserName(userName);
+    }
+
+    @Override
+    public UsuarioDTO getTemaUsuario(String userName) {
+        return usuarioUpdateService.updateTema(userName);
     }
 }

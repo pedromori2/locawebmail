@@ -1,6 +1,8 @@
 package br.com.locaweb.service.usuario;
 
 import br.com.locaweb.entity.Usuario;
+import br.com.locaweb.entity.UsuarioDTO;
+import br.com.locaweb.mapper.UsuarioMapper;
 import br.com.locaweb.repository.UsuarioRepository;
 import br.com.locaweb.request.UsuarioRequest;
 import lombok.RequiredArgsConstructor;
@@ -32,4 +34,11 @@ public class UsuarioUpdateService {
 
         return user;
     }
+
+    public UsuarioDTO updateTema(String userName) {
+        Usuario user = (Usuario) usuarioRepository.findByUserName(userName);
+        UsuarioDTO userDTO = UsuarioMapper.toDTO(user);
+        return userDTO;
+    }
+
 }
